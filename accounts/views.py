@@ -81,7 +81,7 @@ def login(request):
                         product_variation.append(list(variation))
                     # Get the cart items from the user to access his product variation
                     cart_item = CartItem.objects.filter(user=user)
-                    #exsisting variation and current variations
+                    # Exsisting variation and current variations
                     ex_var_list = []
                     id = []
                     for item in cart_item:
