@@ -157,16 +157,21 @@ def order_complete(request):
     # return render(request, 'orders/order_complete.html')
     order_number = request.GET.get('order_number')
     transID = request.GET.get('payment_id')
+    print(order_number)
+    print(transID)
 
     try:
+        print('area1');
         order = Order.objects.get(order_number=order_number, is_ordered=True)
+        print('area2');
         ordered_products = OrderProduct.objects.filter(order_id=order.id)
+        print('area3');
 
         subtotal = 0
 
         for i in ordered_products:
             subtotal += i.product_price*i.quantity
-
+        print('area4');
         payment = Payment.objects.get(payment_id=transID)
 
         context = {
@@ -177,6 +182,7 @@ def order_complete(request):
             'payment' : payment,
             'subtotal' : subtotal,
         }
+        print('area5');
         return render(request, 'orders/order_complete.html', context)
 
     except:
